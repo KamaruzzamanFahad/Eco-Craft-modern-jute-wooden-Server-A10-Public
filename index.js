@@ -53,7 +53,7 @@ async function run() {
     app.post('/craft', async (req,res) => {
         const doc = req.body;
         const result = await craftcollection.insertOne(doc)
-        res.send(result)
+        res.send(result);
     })
 
     
