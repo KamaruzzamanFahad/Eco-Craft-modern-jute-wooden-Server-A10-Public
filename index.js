@@ -43,11 +43,10 @@ async function run() {
 
     app.get('/craft/:id', async(req,res)=> {
         const email = req.params.id;
-        const quary = {email: "mihacker41@gmail.com"}
-        const result = await craftcollection.find(quary)
-
-        res.send(result)
-        console.log(email)
+        const quary = {email: email}
+        const result = await craftcollection.find(quary).toArray()
+        res.send(result);
+        console.log(email);
     })
 
 
