@@ -45,7 +45,7 @@ async function run() {
         const email = req.params.id;
         const quary = {email: "mihacker41@gmail.com"}
         const result = await craftcollection.find(quary)
-        
+
         res.send(result)
         console.log(email)
     })
@@ -55,7 +55,6 @@ async function run() {
         const doc = req.body;
         const result = await craftcollection.insertOne(doc)
         res.send(result)
-        console.log(doc)
     })
 
     
