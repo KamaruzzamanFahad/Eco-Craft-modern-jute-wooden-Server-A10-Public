@@ -32,7 +32,7 @@ async function run() {
     app.get('/craft', async (req,res) =>{
         const data = craftcollection.find()
         const result = await data.toArray()
-        res.send(result)
+        res.send(result);
     })
 
     app.get('/subcatagory', async (req,res) =>{
