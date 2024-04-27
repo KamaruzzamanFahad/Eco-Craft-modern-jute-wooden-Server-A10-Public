@@ -28,7 +28,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
- 
+
     const database = client.db('ArtAndCraft')
     const craftcollection = database.collection('Craft')
     const subcatagorycollection = database.collection('subcategory_Name')
@@ -56,7 +56,7 @@ async function run() {
 
     app.get('/craft/:id', async (req, res) => {
       const id = req.params.id;
-      const quary = {_id: new ObjectId(id)}
+      const quary = { _id: new ObjectId(id) }
       const result = await craftcollection.find(quary).toArray()
       res.send(result);
       console.log(id);
@@ -69,11 +69,36 @@ async function run() {
       res.send(result);
     })
 
-    app.delete('/delete/:id', async(req,res)=>{
+    app.delete('/delete/:id', async (req, res) => {
       const id = req.params.id;
-      console.log('heat delet',id)
-      const quary = {_id: new ObjectId(id)}
+      console.log('heat delet', id)
+      const quary = { _id: new ObjectId(id) }
       const result = await craftcollection.deleteOne(quary);
+      res.send(result)
+    })
+
+
+    app.put('/craft/:id', async (req, res) => {
+      const id = req.params.id;
+      console.log('update hit',id)
+
+      const doc = req.body;
+      const filter = { _id: new ObjectId(id) }
+      const options = { upsert: true };
+      const updatedoc = {
+        $set: {
+          name: doc.name,
+          subcategory_Name: doc.subcategory_Name,
+          price: doc.price,
+          rating: doc.rating,
+          processing_time: doc.processing_time,
+          detils: doc.detils,
+          photo: doc.photo,
+          customizable: doc.customizable,
+          stockStatus: doc.stockStatus,
+        }
+      }
+      const result = await craftcollection.updateOne(filter,updatedoc,options)
       res.send(result)
     })
 
@@ -83,7 +108,7 @@ async function run() {
 
 
     // Send a ping to confirm a successful connection
-   
+
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
