@@ -41,6 +41,11 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/craft/:id',(req,res)=>{
+      const id = req.params.id;
+      console.log(id)
+    })
+
     app.get('/craft/:id', async(req,res)=> {
         const email = req.params.id;
         const quary = {email: email}
