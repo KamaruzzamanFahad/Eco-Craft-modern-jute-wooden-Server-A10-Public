@@ -38,7 +38,7 @@ async function run() {
     app.get('/subcatagory', async (req,res) =>{
         const data = subcatagorycollection.find()
         const result = await data.toArray()
-        res.send(result)
+        res.send(result);
     })
 
     app.get('/craft/:id', async(req,res)=> {
