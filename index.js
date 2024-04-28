@@ -62,6 +62,13 @@ async function run() {
       console.log(id);
     })
 
+    app.get('/allsub/:id',async(req,res)=>{
+      const id = req.params.id;
+      const quary = {subcategory_Name: id}
+      const result = await craftcollection.findOne(quary)
+      res.send(result)
+    })
+
 
     app.post('/craft', async (req, res) => {
       const doc = req.body;
