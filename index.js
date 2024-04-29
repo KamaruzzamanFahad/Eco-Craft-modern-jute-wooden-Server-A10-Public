@@ -65,7 +65,14 @@ async function run() {
     app.get('/allsub/:id',async(req,res)=>{
       const id = req.params.id;
       const quary = {subcategory_Name: id}
-      const result = await craftcollection.findOne(quary)
+      const result = await craftcollection.find(quary).toArray()
+      res.send(result)
+    })
+
+    app.get('/filter',async(req,res)=>{
+      const {email,customizable} = req.query;
+      const quary = {email: email, customizable: customizable};
+      const result = await craftcollection.find(quary).toArray()
       res.send(result)
     })
 
