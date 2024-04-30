@@ -67,6 +67,7 @@ async function run() {
       const quary = {subcategory_Name: id}
       const result = await craftcollection.find(quary).toArray()
       res.send(result)
+      console.log(id)
     })
 
     app.get('/filter',async(req,res)=>{
